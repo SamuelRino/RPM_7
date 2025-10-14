@@ -5,8 +5,126 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RPM_7"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Практическая 7" Height="600" Width="1000">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Создание фигур">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Тип фигуры:" VerticalAlignment="Center" Margin="10"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cb_FigureType" Margin="10" SelectedIndex="0" SelectionChanged="cb_FigureType_SelectionChanged" VerticalAlignment="Center">
+                    <ComboBoxItem Content="Параллелепипед"/>
+                    <ComboBoxItem Content="Шар"/>
+                </ComboBox>
+
+                <StackPanel Grid.Row="1" Grid.ColumnSpan="2" x:Name="pnl_Parallelepiped" Orientation="Vertical" Margin="0,0,0,10">
+                    <Label Content="Параметры параллелепипеда:" Margin="0,0,0,5"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Длина:" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="tb_Length" Text="2" VerticalAlignment="Center"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Ширина:" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="tb_Width" Text="2" VerticalAlignment="Center"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Высота:" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="tb_Height" Text="2" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" x:Name="pnl_Ball" Orientation="Vertical" Margin="10" Visibility="Collapsed">
+                    <Label Content="Параметры шара:" Margin="5"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Радиус:" VerticalAlignment="Center" Margin="10"/>
+                        <TextBox Grid.Column="1" x:Name="tb_Radius" Text="2" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="btn_Create" Content="Создать" Click="Btn_Create_Click" Margin="5"/>
+                    <Button x:Name="btn_Clone" Content="Клонировать" Click="Btn_Clone_Click" Margin="5"/>
+                    <Button x:Name="btn_ShallowClone" Content="Поверхностное клонирование" Click="Btn_ShallowClone_Click" Margin="5"/>
+                </StackPanel>
+
+                <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" Margin="10" BorderBrush="Black">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10">
+                        <TextBlock x:Name="tbl_CurrentFigureInfo" Text="Информация о фигуре появится здесь" TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Коллекция фигур">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                    <Button x:Name="btn_AddToCollection" Content="Добавить в коллекцию" Margin="5" Click="Btn_AddToCollection_Click"/>
+                    <Button x:Name="btn_SortCollection" Content="Сортировать по объёму" Margin="5" Click="Btn_SortCollection_Click"/>
+                    <Button x:Name="btn_ClearCollection" Content="Очистить коллекцию" Margin="5" Click="Btn_ClearCollection_Click"/>
+                </StackPanel>
+
+                <ListBox Grid.Row="1" x:Name="lbox_Figures" BorderThickness="1" BorderBrush="Black">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GetInfo}" TextWrapping="Wrap" Margin="2"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Row="2" Margin="10" x:Name="tbl_Statistics" Text="Количество фигур: 0" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Действия с выбранной фигурой">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="5" x:Name="btn_ShowVolume" Content="Показать объём" Click="Btn_ShowVolume_Click"/>
+                <Button Margin="5" x:Name="btn_ShowInfo" Content="Показать информацию" Click="Btn_ShowInfo_Click"/>
+                <Button Margin="5" x:Name="btn_Compare" Content="Сравнить с текущей" Click="Btn_Compare_Click"/>
+                <Button Margin="5" x:Name="btn_Remove" Content="Удалить выбранную" Click="Btn_Remove_Click"/>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>

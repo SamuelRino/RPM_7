@@ -1,3 +1,4 @@
+
 namespace RPM_7_library
 {
     interface IFigure 
