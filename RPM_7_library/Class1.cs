@@ -1,49 +1,54 @@
 
 namespace RPM_7_library
 {
-    interface IFigure 
+    public interface IFigure 
     {
         double GetVolume();
         string GetInfo();
     }
 
-    class Parallelepiped : IFigure, IComparable, ICloneable
+    public class Parallelepiped : IFigure, IComparable, ICloneable
     {
-        int length;
-        int width;
-        int height;
+        public int Length { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
 
         public Parallelepiped()
         {
-            length = 2;
-            width = 2;
-            height = 2;
+            Length = 2;
+            Width = 2;
+            Height = 2;
         }
 
-        public Parallelepiped(int length, int width, int height)
+        public Parallelepiped(int Length, int Width, int Height)
         {
-            this.length = length;
-            this.width = width;
-            this.height = height;
+            this.Length = Length;
+            this.Width = Width;
+            this.Height = Height;
         }
 
-        public void SetParams(int length, int width, int height)
+        public void SetParams(int Length, int Width, int Height)
         {
-            this.length = length;
-            this.width = width;
-            this.height = height;
+            this.Length = Length;
+            this.Width = Width;
+            this.Height = Height;
         }
 
         public double GetVolume()
         {
-            int volume = length * width * height;
+            int volume = Length * Width * Height;
             return volume;
         }
 
         public string GetInfo()
         {
-            string info = $"Параллелепипед: длина = {length}, ширина = {width}, высота = {height}, объём = {GetVolume()}";
+            string info = $"Параллелепипед: длина = {Length}, ширина = {Width}, высота = {Height}, объём = {GetVolume()}";
             return info;
+        }
+
+        public override string ToString()
+        {
+            return GetInfo();
         }
 
         public int CompareTo(object obj)
@@ -57,9 +62,9 @@ namespace RPM_7_library
         public object Clone()
         {
             Parallelepiped p = new Parallelepiped();
-            p.length = length;
-            p.width = width;
-            p.height = height;
+            p.Length = Length;
+            p.Width = Width;
+            p.Height = Height;
             return p;
         }
 
@@ -69,35 +74,40 @@ namespace RPM_7_library
         }
     }
 
-    class Ball : IFigure, IComparable, ICloneable
+    public class Ball : IFigure, IComparable, ICloneable
     {
-        int radius;
+        public int Radius { get; private set; }
 
         public Ball()
         {
-            radius = 2;
+            Radius = 2;
         }
 
-        public Ball(int radius)
+        public Ball(int Radius)
         {
-            this.radius = radius;
+            this.Radius = Radius;
         }
 
-        public void SetParams(int radius)
+        public void SetParams(int Radius)
         {
-            this.radius = radius;
+            this.Radius = Radius;
         }
 
         public double GetVolume()
         {
-            double volume = Math.Round(4 * Math.PI * Math.Pow(radius, 3) / 3, 3);
+            double volume = Math.Round(4 * Math.PI * Math.Pow(Radius, 3) / 3, 3);
             return volume;
         }
 
         public string GetInfo()
         {
-            string info = $"Шар: радиус = {radius}, объём = {GetVolume()}";
+            string info = $"Шар: радиус = {Radius}, объём = {GetVolume()}";
             return info;
+        }
+
+        public override string ToString()
+        {
+            return GetInfo();
         }
 
         public int CompareTo(object obj)
@@ -111,7 +121,7 @@ namespace RPM_7_library
         public object Clone()
         {
             Ball b = new Ball();
-            b.radius = radius;
+            b.Radius = Radius;
             return b;
         }
 
