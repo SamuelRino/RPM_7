@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPM_7", "RPM_7\RPM_7.csproj", "{EADAE376-6A18-48E1-A151-BD7B0D4A5194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPM_7_library", "RPM_7_library\RPM_7_library.csproj", "{F4F09247-F5A3-4381-880B-0A179966882A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EADAE376-6A18-48E1-A151-BD7B0D4A5194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EADAE376-6A18-48E1-A151-BD7B0D4A5194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EADAE376-6A18-48E1-A151-BD7B0D4A5194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EADAE376-6A18-48E1-A151-BD7B0D4A5194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4F09247-F5A3-4381-880B-0A179966882A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4F09247-F5A3-4381-880B-0A179966882A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4F09247-F5A3-4381-880B-0A179966882A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4F09247-F5A3-4381-880B-0A179966882A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1A5F566-5082-46AE-8FCC-931ECA92B066}
+	EndGlobalSection
+EndGlobal
