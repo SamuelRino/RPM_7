@@ -155,7 +155,7 @@ namespace RPM_7
 
         private void Btn_SortCollection_Click(object sender, RoutedEventArgs e)
         {
-            figures.Sort();
+            figures.Sort((x, y) => x.GetVolume().CompareTo(y.GetVolume()));
             UpdateFiguresList();
             MessageBox.Show("Фигуры отсортированы по объёму", "Успех");
         }
