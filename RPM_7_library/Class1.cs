@@ -5,16 +5,21 @@ namespace RPM_7_library
     {
         double GetVolume();
         string GetInfo();
+        static int Count { get; set; }
     }
 
     public class Parallelepiped : IFigure, IComparable, ICloneable
     {
+        private int id;
         public int Length { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        static public int Count { get; set; }
+        public int ID { get => id; set { } }
 
         public Parallelepiped()
         {
+            id = Count + 1;
             Length = 2;
             Width = 2;
             Height = 2;
@@ -22,6 +27,7 @@ namespace RPM_7_library
 
         public Parallelepiped(int Length, int Width, int Height)
         {
+            id = Count + 1;
             this.Length = Length;
             this.Width = Width;
             this.Height = Height;
@@ -48,7 +54,7 @@ namespace RPM_7_library
 
         public override string ToString()
         {
-            return GetInfo();
+            return $"Параллелепипед{id}";
         }
 
         public int CompareTo(object obj)
@@ -76,15 +82,20 @@ namespace RPM_7_library
 
     public class Ball : IFigure, IComparable, ICloneable
     {
+        private int id;
         public int Radius { get; private set; }
+        static public int Count { get; set; }
+        public int ID { get => id; set { } }
 
         public Ball()
         {
+            id = Count+1;
             Radius = 2;
         }
 
         public Ball(int Radius)
         {
+            id = Count+1;
             this.Radius = Radius;
         }
 
@@ -107,7 +118,7 @@ namespace RPM_7_library
 
         public override string ToString()
         {
-            return GetInfo();
+            return $"Шар{id}";
         }
 
         public int CompareTo(object obj)

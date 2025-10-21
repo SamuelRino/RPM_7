@@ -135,12 +135,13 @@ namespace RPM_7
                     if (currentFig is Parallelepiped)
                     {
                         figures.Add(new Parallelepiped(p.Length, p.Width, p.Height));
+                        Parallelepiped.Count++;
                     }
                     else if (currentFig is Ball)
                     {
                         figures.Add(new Ball(b.Radius));
+                        Ball.Count++;
                     }
-
                     UpdateFiguresList();
                     UpdateStatistics();
                     MessageBox.Show("Фигура добавлена в коллекцию", "Успех");
@@ -154,32 +155,90 @@ namespace RPM_7
 
         private void Btn_SortCollection_Click(object sender, RoutedEventArgs e)
         {
-
+            figures.Sort();
+            UpdateFiguresList();
+            MessageBox.Show("Фигуры отсортированы по объёму", "Успех");
         }
 
         private void Btn_ClearCollection_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Вы уверены, что хотите очистить коллекцию?", "Подтверждение",MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                figures.Clear();
+                UpdateFiguresList();
+                UpdateStatistics();
+                Parallelepiped.Count = 0;
+                Ball.Count = 0;
+            }
         }
 
         private void Btn_ShowVolume_Click(object sender, RoutedEventArgs e)
         {
-
+            if (lbox_Figures.SelectedItem is IFigure selectedFigure)
+            {
+                MessageBox.Show($"Объём выбранной фигуры: {selectedFigure.GetVolume()}", "Объём");
+            }
+            else
+            {
+                MessageBox.Show("Выберите фигуру из коллекции", "Внимание");
+            }
         }
 
         private void Btn_ShowInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            if (lbox_Figures.SelectedItem is IFigure selectedFigure)
+            {
+                MessageBox.Show(selectedFigure.GetInfo(), "Объём");
+            }
+            else
+            {
+                MessageBox.Show("Выберите фигуру из коллекции", "Внимание");
+            }
         }
 
         private void Btn_Compare_Click(object sender, RoutedEventArgs e)
         {
+            if (lbox_Figures.SelectedItem is IFigure selectedFigure && currentFig != null)
+            {
+                if (currentFig.GetType() == selectedFigure.GetType())
+                {
+                    int comparison = ((IComparable)currentFig).CompareTo(selectedFigure);
 
+                    string result = comparison switch
+                    {
+                        > 0 => "Текущая фигура имеет БОЛЬШИЙ объём",
+                        < 0 => "Текущая фигура имеет МЕНЬШИЙ объём",
+                        _ => "Фигуры имеют РАВНЫЙ объём"
+                    };
+
+                    MessageBox.Show(result, "Сравнение объёмов");
+                }
+                else
+                {
+                    MessageBox.Show("Можно сравнивать только фигуры одного типа", "Ошибка");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите фигуру из коллекции для сравнения", "Внимание");
+            }
         }
 
         private void Btn_Remove_Click(object sender, RoutedEventArgs e)
         {
-
+            if (lbox_Figures.SelectedItem is IFigure selectedFigure)
+            {
+                if (MessageBox.Show("Удалить выбранную фигуру из коллекции?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    figures.Remove(selectedFigure);
+                    UpdateFiguresList();
+                    UpdateStatistics();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите фигуру для удаления", "Внимание");
+            }
         }
 
         private void cb_FigureType_SelectionChanged(object sender, SelectionChangedEventArgs e)
