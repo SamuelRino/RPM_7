@@ -8,6 +8,7 @@
         Title="Практическая 7" Height="600" Width="1000">
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -18,7 +19,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Создание фигур">
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem x:Name="btn_Info" Header="Инфо" Click="btn_Info_Click" />
+            <MenuItem x:Name="btn_Exit" Header="Выход" Click="btn_Exit_Click" />
+        </Menu>
+
+        <GroupBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Header="Создание фигур">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -92,7 +98,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Коллекция фигур">
+        <GroupBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Header="Коллекция фигур">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -118,7 +124,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Действия с выбранной фигурой">
+        <GroupBox Grid.Row="3" Grid.ColumnSpan="2" Header="Действия с выбранной фигурой">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Margin="5" x:Name="btn_ShowVolume" Content="Показать объём" Click="Btn_ShowVolume_Click"/>
                 <Button Margin="5" x:Name="btn_ShowInfo" Content="Показать информацию" Click="Btn_ShowInfo_Click"/>

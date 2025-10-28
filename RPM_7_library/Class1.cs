@@ -33,13 +33,6 @@ namespace RPM_7_library
             this.Height = Height;
         }
 
-        public void SetParams(int Length, int Width, int Height)
-        {
-            this.Length = Length;
-            this.Width = Width;
-            this.Height = Height;
-        }
-
         public double GetVolume()
         {
             int volume = Length * Width * Height;
@@ -59,7 +52,7 @@ namespace RPM_7_library
 
         public int CompareTo(object obj)
         {
-            Parallelepiped temp = (Parallelepiped)obj;
+            IFigure temp = (IFigure)obj;
             if (this.GetVolume() > temp.GetVolume()) return 1;
             else if (this.GetVolume() < temp.GetVolume()) return -1;
             else return 0;
@@ -123,7 +116,7 @@ namespace RPM_7_library
 
         public int CompareTo(object obj)
         {
-            Ball temp = (Ball)obj;
+            IFigure temp = (IFigure)obj;
             if (this.GetVolume() > temp.GetVolume()) return 1;
             else if (this.GetVolume() < temp.GetVolume()) return -1;
             else return 0;

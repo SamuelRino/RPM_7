@@ -31,8 +31,6 @@ namespace RPM_7
             currentFig = p;
             pOutPut();
             bOutPut();
-            UpdateCurrentFigureInfo();
-            UpdateStatistics();
         }
 
         private void Btn_Create_Click(object sender, RoutedEventArgs e)
@@ -50,6 +48,7 @@ namespace RPM_7
 
                             p = new Parallelepiped(length, width, height);
                             currentFig = p;
+                            MessageBox.Show("Данный параллепипед выбран в качестве текущей фигуры", "Успех");
                             pOutPut();
                         }
                         else MessageBox.Show("Заполните поля");
@@ -61,6 +60,7 @@ namespace RPM_7
 
                             b = new Ball(radius);
                             currentFig = b;
+                            MessageBox.Show("Данный шар выбран в качестве текущей фигуры", "Успех");
                             bOutPut();
                         }
                         break;
@@ -134,12 +134,12 @@ namespace RPM_7
                 {
                     if (currentFig is Parallelepiped)
                     {
-                        figures.Add(new Parallelepiped(p.Length, p.Width, p.Height));
+                        figures.Add(p);
                         Parallelepiped.Count++;
                     }
                     else if (currentFig is Ball)
                     {
-                        figures.Add(new Ball(b.Radius));
+                        figures.Add(b);
                         Ball.Count++;
                     }
                     UpdateFiguresList();
@@ -155,7 +155,7 @@ namespace RPM_7
 
         private void Btn_SortCollection_Click(object sender, RoutedEventArgs e)
         {
-            figures.Sort((x, y) => x.GetVolume().CompareTo(y.GetVolume()));
+            figures.Sort();
             UpdateFiguresList();
             MessageBox.Show("Фигуры отсортированы по объёму", "Успех");
         }
@@ -264,7 +264,7 @@ namespace RPM_7
 
         private void NumberOnlyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key == Key.Back || e.Key == Key.OemMinus)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key == Key.Back)
             {
                 return;
             }
@@ -303,6 +303,16 @@ namespace RPM_7
             int ballsCount = figures.Count(f => f is Ball);
 
             tbl_Statistics.Text = $"Всего фигур: {figures.Count}\n" + $"Параллелепипедов: {parallelepipedsCount}\n" + $"Шаров: {ballsCount}";
+        }
+
+        private void btn_Info_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Создать интерфейс – фигура (объем). \nСоздать классы - параллелепипед, шар. \nКлассы должны включать конструкторы, функцию для формирования строки информации о фигуре. \nСравнение производить по объему.", "Информация");
+        }
+
+        private void btn_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
